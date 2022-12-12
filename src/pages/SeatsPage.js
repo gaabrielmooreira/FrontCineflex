@@ -1,60 +1,91 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import CineflexFooter from "../components/CineflexFooter";
 import Seat from "../components/Seat";
 
 export default function SeatsPage() {
-    const {sessionId} = useParams();
-    const {seatsList,setSeatsList} = useState([]);
+    const { sessionId } = useParams();
+    const [seatsList, setSeatsList] = useState([]);
+    const [seatsSelec, setSeatsSelec] = useState([]);
+    const [inputName, setInputName] = useState("");
+    const [inputCpf, setInputCpf] = useState("");
+    const navigate = useNavigate();
 
-    useEffect(()=>{
+    function handleSeat(seatId) {
+        if (seatsSelec.includes(seatId)) {
+            const newSeatsSelec = seatsSelec.filter(seat => seat !== seatId);
+            setSeatsSelec(newSeatsSelec);
+        } else {
+            setSeatsSelec([...seatsSelec, seatId]);
+        }
+    }
+
+    function bookSeats(event) {
+        event.preventDefault();
+        console.log(seatsSelec);
+        if (seatsSelec.length === 0 ) return alert("Não selecionou nenhum assento!");
+
+        const promise = axios.post("https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many", { ids: seatsSelec, name: inputName, cpf: inputCpf });
+        promise.then(() => navigate("/success"));
+    }
+
+    useEffect(() => {
         const promise = axios.get(`https://mock-api.driven.com.br/api/v8/cineflex/showtimes/${sessionId}/seats`);
         promise.then(res => setSeatsList(res.data));
         promise.catch(err => console.log(err.response.data));
-    },[]);
-    if(seatsList === undefined) return;
+    }, []);
+
+    if (seatsList === undefined || seatsList.movie === undefined) return;
+
     return (
         <SeatsPageContainer>
             <h2>Selecione o horário</h2>
             <SeatsContainer>
-                <Seat/>
-                <Seat/>
-                <Seat/>
-                <Seat/>
-                <Seat/>
-                <Seat/>
-                <Seat/>
-                <Seat/>
-                <Seat/>
-                <Seat/>
+                {
+                    seatsList.seats.map((seat) =>
+                        <Seat
+                            key={seat.id}
+                            id={seat.id}
+                            name={seat.name}
+                            isAvailable={seat.isAvailable}
+                            seatsSelec={seatsSelec}
+                            handleSeat={handleSeat}
+                        />)
+                }
             </SeatsContainer>
             <SuperscriptionContainer>
                 <Superscription backgroundColor="#1AAE9E" borderColor="#0E7D71">
-                    <div>                        
+                    <div>
                     </div>
                     <p>Selecionado</p>
                 </Superscription>
                 <Superscription backgroundColor="#C3CFD9" borderColor="#7B8B99">
-                    <div>                        
+                    <div>
                     </div>
                     <p>Disponível</p>
                 </Superscription>
                 <Superscription backgroundColor="#FBE192" borderColor="#F7C52B">
-                    <div>                        
+                    <div>
                     </div>
                     <p>Indisponivel</p>
                 </Superscription>
             </SuperscriptionContainer>
-            <CustomerForm>
-                <label forHtml="name">Nome do comprador:</label>
-                <input id="name" type="text" placeholder="Digite seu nome..."/>
-                <label forHtml="cpf">CPF do comprador:</label>
-                <input id="cpf" type="number" placeholder="Digite seu CPF..."/>
+            <CustomerForm onSubmit={bookSeats}>
+                <label htmlFor="name">Nome do comprador:</label>
+                <input onChange={e => setInputName(e.target.value)} value={inputName} id="name" type="text" placeholder="Digite seu nome..." required />
+                <label htmlFor="cpf">CPF do comprador:</label>
+                <input onChange={e => setInputCpf(e.target.value)} value={inputCpf} id="cpf" type="text" placeholder="Digite seu CPF..." required />
                 <button type="submit">Reservar assento(s)</button>
             </CustomerForm>
-            <CineflexFooter title={seatsList.movie.title} posterURL={seatsList.movie.posterURL} time={seatsList.name}/>
+            <CineflexFooter
+                isSeatsPage={true}
+                title={seatsList.movie.title}
+                posterURL={seatsList.movie.posterURL}
+                time={seatsList.name}
+                weekday={seatsList.day.weekday}
+            />
         </SeatsPageContainer>
     )
 }

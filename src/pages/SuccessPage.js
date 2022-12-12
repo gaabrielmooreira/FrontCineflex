@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export default function SuccessPage() {
     return (
@@ -19,7 +20,9 @@ export default function SuccessPage() {
                 <p>Nome: nomeComprador</p>
                 <p>CPF: cpfComprador</p>
             </MovieInfoContainer>
-            <button>Voltar para Home</button>
+            <Link to="/">
+                <button>Voltar para Home</button>
+            </Link>
         </SuccessPageContainer>
     )
 }
@@ -38,16 +41,20 @@ const SuccessPageContainer = styled.div`
         align-self: center;
         text-align: center;
     }
+    a {
+        margin-top: 70px;
+        align-self: center;
+    }
     button{
         width: 225px;
         height: 42px;
-        align-self: center;
+        
         background-color: #E8833A;
         color: #FFFFFF;
         font-size: 18px;
         border: none;
         border-radius: 3px;
-        margin-top: 70px;
+        
         &:hover{
             cursor: pointer;
         }

@@ -6,7 +6,6 @@ import SuccessPage from "./pages/SuccessPage";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
-  
   return (
     <BrowserRouter>
       <CineflexHeader/>

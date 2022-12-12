@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
 export default function Movie(props) {
-    const { title, posterURL} = props;
+    const { title, posterURL } = props;
     return (
         <MovieContainer>
-                <img src={posterURL} alt={title} />
+            <img src={posterURL} alt={title} />
         </MovieContainer>
     )
 }

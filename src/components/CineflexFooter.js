@@ -1,13 +1,17 @@
 import styled from "styled-components"
 
 export default function CineflexFooter(props) {
-    const {title, posterURL} = props;
+    const { title, posterURL, time, weekday, isSeatsPage } = props;
     return (
         <CineFooter>
             <ImgContainer>
-                <img src={posterURL} alt="Imagem do Filme"/>
+                <img src={posterURL} alt="Imagem do Filme" />
             </ImgContainer>
-            <p>{title}</p>
+
+            <div>
+                <p>{title}</p>
+                {isSeatsPage && <p>{weekday} - {time}</p>}
+            </div>
         </CineFooter>
     )
 }
@@ -29,7 +33,6 @@ const CineFooter = styled.footer`
         color:#293845;
     }
 `
-
 const ImgContainer = styled.div`
     padding:8px;
     background-color: #FFF;
