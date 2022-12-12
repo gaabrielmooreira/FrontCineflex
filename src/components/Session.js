@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 export default function Session(props) {
     const { weekday, date, showtimes } = props
     return (
-        <SessionContainer >
+        <SessionContainer data-test="movie-day">
             <p>{weekday} - {date}</p>
             <SessionTimesContainer>
                 {
