@@ -24,6 +24,7 @@ export default function SessionsPage() {
             <SessionsContainer>
                 {sessionsList.days.map(session =>
                     <Session
+                        data-test="movie-day"
                         key={session.id}
                         weekday={session.weekday}
                         date={session.date}

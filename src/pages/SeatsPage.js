@@ -57,6 +57,7 @@ export default function SeatsPage({setPurchaseDetails}) {
                 {
                     seatsList.seats.map((seat) =>
                         <Seat
+                            data-test="seat"
                             key={seat.id}
                             id={seat.id}
                             name={seat.name}
