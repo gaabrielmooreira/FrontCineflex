@@ -1,9 +1,15 @@
 import styled from "styled-components";
 import CineflexFooter from "../components/CineflexFooter";
 import Session from "../components/Session";
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 
 export default function SessionsPage() {
+    const {sessionsId} = useParams();
+    const [sessionsList,setSessionsList] = useState([]);
+
     return (
         <SessionsPageContainer>
             <h2>Selecione o horário</h2>

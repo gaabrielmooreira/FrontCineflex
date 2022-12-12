@@ -1,18 +1,37 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import Movie from "../components/Movie";
 
 
 export default function MoviesPage() {
+    const [movieList,setMovieList] = useState([]);
+
+    useEffect(()=>{
+        const promise = axios.get("https://mock-api.driven.com.br/api/v8/cineflex/movies");
+        promise.then(res => {
+            setMovieList(res.data);
+            console.log(res.data);
+        });
+        promise.catch(err => console.log(err.response.data));
+    },[]);
+
+
     return (
         <MoviesPageContainer>
             <h2>Selecione o filme</h2>
             <MoviesContainer>
-                <Movie />
-                <Movie />
-                <Movie />
-                <Movie />
-                <Movie />
-                <Movie />
+                {
+                    movieList.map( movie => 
+                        <Movie 
+                            key={movie.id}
+                            id={movie.id}
+                            title={movie.title} 
+                            posterURL={movie.posterURL} 
+                            releaseDate={movie.releaseDate}
+                            overview={movie.overview}
+                        />)
+                }
             </MoviesContainer>
         </MoviesPageContainer>
 

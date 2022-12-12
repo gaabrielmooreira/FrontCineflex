@@ -6,13 +6,14 @@ import SuccessPage from "./pages/SuccessPage";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
+  
   return (
     <BrowserRouter>
       <CineflexHeader/>
       <Routes>
         <Route path="/" element={<MoviesPage />} />
-        <Route path="/session/:SessionId" element={<SessionsPage />} />
-        <Route path="/seats/:SeatsId" element={<SeatsPage />} />
+        <Route path="/sessions/:sessionsId" element={<SessionsPage />} />
+        <Route path="/seats/:seatsId" element={<SeatsPage />} />
         <Route path="/success" element={<SuccessPage />} />
       </Routes>
     </BrowserRouter>
