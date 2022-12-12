@@ -1,12 +1,13 @@
 import styled from "styled-components"
 
-export default function CineflexFooter() {
+export default function CineflexFooter(props) {
+    const {title, posterURL} = props;
     return (
         <CineFooter>
             <ImgContainer>
-                <img src="" alt=""/>
+                <img src={posterURL} alt="Imagem do Filme"/>
             </ImgContainer>
-            <p>Enola Holmes</p>
+            <p>{title}</p>
         </CineFooter>
     )
 }

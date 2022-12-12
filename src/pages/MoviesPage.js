@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import Movie from "../components/Movie";
-
+import { Link } from "react-router-dom";
 
 export default function MoviesPage() {
     const [movieList,setMovieList] = useState([]);
@@ -16,21 +16,22 @@ export default function MoviesPage() {
         promise.catch(err => console.log(err.response.data));
     },[]);
 
-
+    if(movieList === undefined) return;
+    
     return (
         <MoviesPageContainer>
             <h2>Selecione o filme</h2>
             <MoviesContainer>
                 {
                     movieList.map( movie => 
-                        <Movie 
-                            key={movie.id}
-                            id={movie.id}
-                            title={movie.title} 
-                            posterURL={movie.posterURL} 
-                            releaseDate={movie.releaseDate}
-                            overview={movie.overview}
-                        />)
+                        <Link to={`/sessions/${movie.id}`}>
+                            <Movie 
+                                key={movie.id}
+                                id={movie.id}
+                                title={movie.title} 
+                                posterURL={movie.posterURL}
+                            />
+                        </Link>)
                 }
             </MoviesContainer>
         </MoviesPageContainer>

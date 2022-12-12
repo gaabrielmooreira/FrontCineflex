@@ -1,8 +1,8 @@
 import styled from "styled-components"
 
-export default function SessionTimeButton() {
+export default function SessionTime({name}) {
     return (
-        <StyledSessionTimeButton>15:00</StyledSessionTimeButton>
+        <StyledSessionTimeButton>{name}</StyledSessionTimeButton>
     )
 }
 

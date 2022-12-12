@@ -1,8 +1,20 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import CineflexFooter from "../components/CineflexFooter";
 import Seat from "../components/Seat";
 
 export default function SeatsPage() {
+    const {sessionId} = useParams();
+    const {seatsList,setSeatsList} = useState([]);
+
+    useEffect(()=>{
+        const promise = axios.get(`https://mock-api.driven.com.br/api/v8/cineflex/showtimes/${sessionId}/seats`);
+        promise.then(res => setSeatsList(res.data));
+        promise.catch(err => console.log(err.response.data));
+    },[]);
+    if(seatsList === undefined) return;
     return (
         <SeatsPageContainer>
             <h2>Selecione o horário</h2>
@@ -42,7 +54,7 @@ export default function SeatsPage() {
                 <input id="cpf" type="number" placeholder="Digite seu CPF..."/>
                 <button type="submit">Reservar assento(s)</button>
             </CustomerForm>
-            <CineflexFooter />
+            <CineflexFooter title={seatsList.movie.title} posterURL={seatsList.movie.posterURL} time={seatsList.name}/>
         </SeatsPageContainer>
     )
 }
@@ -53,6 +65,7 @@ const SeatsPageContainer = styled.div`
     flex-direction: column;
     align-items: center;
     margin-top: 67px;
+    margin-bottom: 117px;
     padding: 40px 24px;
     h2 {
         font-family: 'Roboto',sans-serif;

@@ -1,13 +1,10 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 
 export default function Movie(props) {
-    const {id, title, posterURL, releaseDate, overview} = props;
+    const { title, posterURL} = props;
     return (
         <MovieContainer>
-            <Link to={`/sessions/${id}`}>
                 <img src={posterURL} alt={title} />
-            </Link>
         </MovieContainer>
     )
 }

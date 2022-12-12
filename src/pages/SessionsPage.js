@@ -7,18 +7,31 @@ import axios from "axios";
 
 
 export default function SessionsPage() {
-    const {sessionsId} = useParams();
+    const {movieId} = useParams();
     const [sessionsList,setSessionsList] = useState([]);
+    
+    useEffect(()=>{
+        const promise = axios.get(`https://mock-api.driven.com.br/api/v8/cineflex/movies/${movieId}/showtimes`);
+        promise.then(res => setSessionsList(res.data));
+        promise.catch( err => console.log(err.response.data));
+    },[])
 
+    if(sessionsList.days === undefined) return;
+    
     return (
         <SessionsPageContainer>
             <h2>Selecione o horário</h2>
             <SessionsContainer>
-                <Session />
-                <Session />
-                <Session />
+                {sessionsList.days.map(session => 
+                    <Session 
+                        key={session.id}
+                        weekday={session.weekday}
+                        date={session.date}
+                        showtimes={session.showtimes}
+                    />)
+                }
             </SessionsContainer>
-            <CineflexFooter/>
+            <CineflexFooter title={sessionsList.title} posterURL={sessionsList.posterURL}/>
         </SessionsPageContainer>
     )
 }
@@ -28,6 +41,7 @@ const SessionsPageContainer = styled.div`
     flex-direction: column;
     align-items: center;
     margin-top: 67px;
+    margin-bottom: 117px;
     padding: 40px 32px;
     h2 {
         font-family: 'Roboto',sans-serif;

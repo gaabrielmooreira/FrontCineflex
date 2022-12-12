@@ -1,14 +1,20 @@
 import styled from "styled-components";
-import SessionTimeButton from "./SessionTimeButton";
+import SessionTime from "./SessionTime";
+import { Link } from "react-router-dom";
 
-export default function Session() {
+export default function Session(props) {
+    const {weekday, date, showtimes} = props
     return (
         <SessionContainer>
-            <p>Quinta-feira - 24/06/2021</p>
+            <p>{weekday} - {date}</p>
             <SessionTimesContainer>
-                <SessionTimeButton />
-                <SessionTimeButton />
-                <SessionTimeButton />
+                {
+                    showtimes.map( t =>
+                        <Link to={`/seats/${t.id}`}>
+                            <SessionTime key={t.id} name={t.name}/>
+                        </Link>
+                    )
+                }
             </SessionTimesContainer>
         </SessionContainer>
     )
