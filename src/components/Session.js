@@ -5,12 +5,12 @@ import { Link } from "react-router-dom";
 export default function Session(props) {
     const { weekday, date, showtimes } = props
     return (
-        <SessionContainer>
+        <SessionContainer data-test="movie-day">
             <p>{weekday} - {date}</p>
             <SessionTimesContainer>
                 {
                     showtimes.map(time =>
-                        <Link key={time.id} to={`/seats/${time.id}`}>
+                        <Link data-test="showtime" key={time.id} to={`/seats/${time.id}`}>
                             <SessionTime name={time.name} />
                         </Link>
                     )

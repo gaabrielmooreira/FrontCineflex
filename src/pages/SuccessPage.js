@@ -19,21 +19,21 @@ export default function SuccessPage({ purchaseDetails, setPurchaseDetails }) {
     return (
         <SuccessPageContainer>
             <h2>Pedido feito com sucesso!</h2>
-            <MovieInfoContainer>
+            <MovieInfoContainer data-test="movie-info">
                 <h3>Filme e sessão</h3>
                 <p>{purchaseDetails.title}</p>
                 <p>{purchaseDetails.date} {purchaseDetails.time}</p>
             </MovieInfoContainer>
-            <MovieInfoContainer>
+            <MovieInfoContainer data-test="seats-info">
                 <h3>Ingressos</h3>
                 {purchaseDetails.seats.map((seatName) => <p>Assento {seatName}</p>)}
             </MovieInfoContainer>
-            <MovieInfoContainer>
+            <MovieInfoContainer data-test="client-info">
                 <h3>Comprador</h3>
                 <p>Nome: {purchaseDetails.name}</p>
                 <p>CPF: {purchaseDetails.cpf}</p>
             </MovieInfoContainer>
-            <button onClick={goToHome}>Voltar para Home</button>
+            <button data-test="go-home-btn" onClick={goToHome}>Voltar para Home</button>
         </SuccessPageContainer>
     )
 }

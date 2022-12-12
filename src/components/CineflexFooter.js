@@ -3,7 +3,7 @@ import styled from "styled-components"
 export default function CineflexFooter(props) {
     const { title, posterURL, time, weekday, isSeatsPage } = props;
     return (
-        <CineFooter>
+        <CineFooter data-test="footer">
             <ImgContainer>
                 <img src={posterURL} alt="Imagem do Filme" />
             </ImgContainer>

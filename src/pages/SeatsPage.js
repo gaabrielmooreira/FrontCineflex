@@ -85,10 +85,10 @@ export default function SeatsPage({setPurchaseDetails}) {
             </SuperscriptionContainer>
             <CustomerForm onSubmit={bookSeats}>
                 <label htmlFor="name">Nome do comprador:</label>
-                <input onChange={e => setInputName(e.target.value)} value={inputName} id="name" type="text" placeholder="Digite seu nome..." required />
+                <input data-test="client-name" onChange={e => setInputName(e.target.value)} value={inputName} id="name" type="text" placeholder="Digite seu nome..." required />
                 <label htmlFor="cpf">CPF do comprador:</label>
-                <input onChange={e => setInputCpf(e.target.value)} value={inputCpf} id="cpf" type="text" placeholder="Digite seu CPF..." required />
-                <button type="submit">Reservar assento(s)</button>
+                <input data-test="client-cpf" onChange={e => setInputCpf(e.target.value)} value={inputCpf} id="cpf" type="text" placeholder="Digite seu CPF..." required />
+                <button data-test="book-seat-btn" type="submit">Reservar assento(s)</button>
             </CustomerForm>
             <CineflexFooter
                 isSeatsPage={true}
