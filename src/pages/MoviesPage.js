@@ -23,8 +23,8 @@ export default function MoviesPage() {
             <MoviesContainer>
                 {
                     movieList.map(movie =>
-                        <Link key={movie.id} to={`/sessions/${movie.id}`}>
-                            <Movie data-test="movie"
+                        <Link data-test="movie" key={movie.id} to={`/sessoes/${movie.id}`}>
+                            <Movie 
                                 id={movie.id}
                                 title={movie.title}
                                 posterURL={movie.posterURL}

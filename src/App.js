@@ -21,9 +21,9 @@ function App() {
       <CineflexHeader/>
       <Routes>
         <Route path="/" element={<MoviesPage />} />
-        <Route path="/sessions/:movieId" element={<SessionsPage />} />
-        <Route path="/seats/:sessionId" element={<SeatsPage setPurchaseDetails={setPurchaseDetails}/>} />
-        <Route path="/success" element={<SuccessPage purchaseDetails={purchaseDetails} setPurchaseDetails={setPurchaseDetails}/>} />
+        <Route path="/sessoes/:movieId" element={<SessionsPage />} />
+        <Route path="/assentos/:sessionId" element={<SeatsPage setPurchaseDetails={setPurchaseDetails}/>} />
+        <Route path="/sucesso" element={<SuccessPage purchaseDetails={purchaseDetails} setPurchaseDetails={setPurchaseDetails}/>} />
       </Routes>
     </BrowserRouter>
   );

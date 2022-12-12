@@ -10,8 +10,8 @@ export default function Session(props) {
             <SessionTimesContainer>
                 {
                     showtimes.map(time =>
-                        <Link key={time.id} to={`/seats/${time.id}`}>
-                            <SessionTime data-test="showtime" name={time.name} />
+                        <Link data-test="showtime" key={time.id} to={`/assentos/${time.id}`}>
+                            <SessionTime name={time.name} />
                         </Link>
                     )
                 }

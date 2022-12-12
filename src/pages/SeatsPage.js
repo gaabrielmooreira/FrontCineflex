@@ -38,7 +38,7 @@ export default function SeatsPage({setPurchaseDetails}) {
                 name:inputName,
                 cpf:inputCpf 
             })
-            navigate("/success");
+            navigate("/sucesso");
         });
     }
 
