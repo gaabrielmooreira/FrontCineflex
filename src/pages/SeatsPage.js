@@ -5,30 +5,41 @@ import styled from "styled-components";
 import CineflexFooter from "../components/CineflexFooter";
 import Seat from "../components/Seat";
 
-export default function SeatsPage() {
+export default function SeatsPage({setPurchaseDetails}) {
     const { sessionId } = useParams();
     const [seatsList, setSeatsList] = useState([]);
     const [seatsSelec, setSeatsSelec] = useState([]);
+    const [seatsSelecName, setSeatsSelecName] = useState([]);
     const [inputName, setInputName] = useState("");
     const [inputCpf, setInputCpf] = useState("");
     const navigate = useNavigate();
 
-    function handleSeat(seatId) {
+    function handleSeat(seatId,seatName) {
         if (seatsSelec.includes(seatId)) {
-            const newSeatsSelec = seatsSelec.filter(seat => seat !== seatId);
-            setSeatsSelec(newSeatsSelec);
+            setSeatsSelec(seatsSelec.filter(seat => seat !== seatId));
+            setSeatsSelecName(seatsSelecName.filter(seat => seat !== seatName));
         } else {
             setSeatsSelec([...seatsSelec, seatId]);
+            setSeatsSelecName([...seatsSelecName, seatName]);
         }
     }
 
     function bookSeats(event) {
         event.preventDefault();
-        console.log(seatsSelec);
         if (seatsSelec.length === 0 ) return alert("Não selecionou nenhum assento!");
 
         const promise = axios.post("https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many", { ids: seatsSelec, name: inputName, cpf: inputCpf });
-        promise.then(() => navigate("/success"));
+        promise.then(() => {
+            setPurchaseDetails({
+                title:seatsList.movie.title,
+                date:seatsList.day.date,
+                time:seatsList.name,
+                seats: seatsSelecName,
+                name:inputName,
+                cpf:inputCpf 
+            })
+            navigate("/success");
+        });
     }
 
     useEffect(() => {
@@ -89,7 +100,6 @@ export default function SeatsPage() {
         </SeatsPageContainer>
     )
 }
-
 
 const SeatsPageContainer = styled.div`
     display: flex;

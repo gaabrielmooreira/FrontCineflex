@@ -1,28 +1,39 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-export default function SuccessPage() {
+
+
+export default function SuccessPage({ purchaseDetails, setPurchaseDetails }) {
+    const navigate = useNavigate();
+    function goToHome() {
+        setPurchaseDetails({
+            title: "",
+            date: "",
+            time: "",
+            seats: [],
+            name: "",
+            cpf: ""
+        })
+        navigate("/");
+    }
     return (
         <SuccessPageContainer>
             <h2>Pedido feito com sucesso!</h2>
             <MovieInfoContainer>
                 <h3>Filme e sessão</h3>
-                <p>Nome do filme</p>
-                <p>Data e hora do filme</p>
+                <p>{purchaseDetails.title}</p>
+                <p>{purchaseDetails.date} {purchaseDetails.time}</p>
             </MovieInfoContainer>
             <MovieInfoContainer>
                 <h3>Ingressos</h3>
-                <p>Assento Id</p>
-                <p>Assento Id</p>
+                {purchaseDetails.seats.map((seatName) => <p>Assento {seatName}</p>)}
             </MovieInfoContainer>
             <MovieInfoContainer>
                 <h3>Comprador</h3>
-                <p>Nome: nomeComprador</p>
-                <p>CPF: cpfComprador</p>
+                <p>Nome: {purchaseDetails.name}</p>
+                <p>CPF: {purchaseDetails.cpf}</p>
             </MovieInfoContainer>
-            <Link to="/">
-                <button>Voltar para Home</button>
-            </Link>
+            <button onClick={goToHome}>Voltar para Home</button>
         </SuccessPageContainer>
     )
 }
@@ -41,14 +52,11 @@ const SuccessPageContainer = styled.div`
         align-self: center;
         text-align: center;
     }
-    a {
-        margin-top: 70px;
-        align-self: center;
-    }
     button{
         width: 225px;
         height: 42px;
-        
+        margin-top: 70px;
+        align-self: center;
         background-color: #E8833A;
         color: #FFFFFF;
         font-size: 18px;

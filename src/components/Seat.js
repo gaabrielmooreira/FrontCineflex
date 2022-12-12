@@ -4,7 +4,7 @@ export default function Seat(props) {
     const { id, name, isAvailable, seatsSelec, handleSeat } = props;
 
     return (
-        <SeatButton onClick={() => handleSeat(id)} seatsSelec={seatsSelec} id={id} isAvailable={isAvailable} disabled={!isAvailable}>
+        <SeatButton onClick={() => handleSeat(id,name)} seatsSelec={seatsSelec} id={id} isAvailable={isAvailable} disabled={!isAvailable}>
             {name}
         </SeatButton>
     )
