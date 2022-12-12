@@ -14,7 +14,8 @@ export default function SeatsPage({setPurchaseDetails}) {
     const [inputCpf, setInputCpf] = useState("");
     const navigate = useNavigate();
 
-    function handleSeat(seatId,seatName) {
+    function handleSeat(seatId,seatName,isAvailable) {
+        if(isAvailable === false) return alert("O assento não está disponível!");
         if (seatsSelec.includes(seatId)) {
             setSeatsSelec(seatsSelec.filter(seat => seat !== seatId));
             setSeatsSelecName(seatsSelecName.filter(seat => seat !== seatName));
