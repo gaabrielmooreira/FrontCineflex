@@ -19,6 +19,7 @@ const SeatButton = styled.button`
     background-color: ${props => props.isAvailable ? (props.seatsSelec.includes(props.id) ? "#1AAE9E" : "#C3CFD9") : "#FBE192"};
     border: 1px solid ${props => props.isAvailable ? (props.seatsSelec.includes(props.id) ? "#0E7D71" : "#808F9D") : "#F7C52B"};
     border-radius: 12px;
+    text-align: center;
     &:hover{
         cursor: pointer;
     }

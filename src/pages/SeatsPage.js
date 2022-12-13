@@ -53,7 +53,7 @@ export default function SeatsPage({setPurchaseDetails}) {
 
     return (
         <SeatsPageContainer>
-            <h2>Selecione o horário</h2>
+            <h2>Selecione o assento</h2>
             <SeatsContainer>
                 {
                     seatsList.seats.map((seat) =>
