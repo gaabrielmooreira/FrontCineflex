@@ -1,3 +1,3 @@
-# Projeto Cineflex
+<h1>Cineflex</h1>
 
-Projeto para comprar ingressos para um filme em cartaz no horário indicado e reservar o lugar. 
+<h3>Application for costumers buy movie tickets and book their seats.<h3>
