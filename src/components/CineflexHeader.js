@@ -1,9 +1,12 @@
 import styled from "styled-components"
+import { Link } from "react-router-dom"
 
 export default function CineflexHeader() {
     return (
         <CineHeader>
-            <h1>CINEFLEX</h1>
+            <Link to="/">
+                <h1>CINEFLEX</h1>
+            </Link>
         </CineHeader>
     )
 }
@@ -22,4 +25,8 @@ const CineHeader = styled.header`
     align-items: center;
     color: #E8833A;
     background-color: #C3CFD9;
+    a {
+        text-decoration: none;
+        color: #E8833A;
+    }
 ` 
